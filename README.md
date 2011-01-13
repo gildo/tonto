@@ -21,7 +21,7 @@ synopsis
       :date    => "Time.now"
     }
 
-    db.get(26).name
+    db.get(26)["name"]
 
 > My First post
 
