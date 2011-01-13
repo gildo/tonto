@@ -8,6 +8,14 @@ description
 
 **tonto** ( which can be translated from Italian to *git* ) is a _simple_, _high-level_ and a bit _stupid_ document-oriented store that allows you to use git repos as schema-less NoSQL databases.
 
+installation
+------------
+
+The best way to install **tonto** is with RubyGems:
+
+    $ [sudo] gem install tonto
+
+
 synopsis
 --------
 
