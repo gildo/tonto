@@ -12,7 +12,7 @@ synopsis
 --------
 
     require 'tonto'
-    db = Tonto.new("/my/git/db")
+    db = Tonto::Repo.new("/my/git/db")
 
     db.put {
       :id      => 26,
