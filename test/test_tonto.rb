@@ -1,3 +1,4 @@
+require 'digest/md5'
 require File.expand_path(File.join(File.dirname(__FILE__), "helper"))
 
 context "db" do
@@ -39,7 +40,12 @@ context "db" do
     assert @db.remove(12)
     assert_equal nil, @db.get(12)
   end
-
+  
+  test "add a blob" do
+    assert @db.put :id => 3, :name => "logo", :blobs => {'octocat' => "octocat.png"}
+    digest = Digest::MD5.hexdigest(File.read("octocat.png"))
+    assert_equal digest, Digest::MD5.hexdigest(@db.get(3)["blobs"]["octocat"])
+  end
   
   #teardown do
   #  FileUtils.rm_rf(@db.path)

@@ -42,6 +42,11 @@ module Tonto
 
     def add(doc)
       @index.add(File.join(doc[:id].to_s, "attributes.json"), JSON.pretty_generate(doc))
+      if doc.has_key?(:blobs) && doc[:blobs].is_a?(Hash)
+        doc[:blobs].each do |k,v|
+          @index.add(File.join(doc[:id].to_s, k), v)
+        end
+      end
       @index.commit("document #{doc[:id]}")
     end
 
