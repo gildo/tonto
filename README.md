@@ -25,7 +25,7 @@ synopsis
 
 > My First post
 
-    db.update({:id => 26, :name => "I'm tonto"})
+    db.put({:id => 26, :name => "I'm tonto"})
 > true
 
     db.get(26)["name"]
