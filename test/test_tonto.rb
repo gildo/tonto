@@ -21,19 +21,21 @@ context "db" do
   end
 
   test "get a document by id" do
+    assert @db.put({:id => 12, :name => "tonto", :says => "i'm not stupid :("})
     assert @db.get(12)
     assert_equal "tonto", @db.get(12)["name"]
   end
 
   test "ask if a key exists" do
+    assert @db.put({:id => 12, :name => "tonto", :says => "i'm not stupid :("})
     assert @db.exist?(12)
     assert @db.exists?(12)
   end
 
-  #NEEDS REVIEW
   test "update a document" do
-    assert @db.put({:id => 12, :nickname => "git"})
-    assert_equal "git", @db.get(12)["nickname"]
+    assert @db.put({:id => "hey!!", :name => "tonto", :wtf => "fwesq"})
+    assert @db.put({:id => "hey!!", :name => "git"})
+    assert_equal "git", @db.get("hey!!")["name"]
   end
 
   test "remove a document" do

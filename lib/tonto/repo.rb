@@ -15,6 +15,10 @@ module Tonto
       @db = Grit::Repo.new(path)
       @index = Grit::Index.new(@db)
 
+      ids!
+    end
+
+    def ids!
       # Loads the list of known documents
       # !!! Find a better way to do this !!!
       @db.commits.any? ? ids = tri.contents.map {|c| c.name.to_i} : ids = []
@@ -57,6 +61,7 @@ module Tonto
     end
 
     def exist? id
+      ids!
       @ids.include?(id)
     end
 
