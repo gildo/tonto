@@ -21,7 +21,7 @@ module Tonto
     def ids!
       # Loads the list of known documents
       # !!! Find a better way to do this !!!
-      @db.commits.any? ? ids = tri.contents.map {|c| c.name.to_i} : ids = []
+      @db.commits.any? ? ids = tri.contents.map {|c| c.name} : ids = []
       @ids = ids
     end
 
@@ -30,8 +30,12 @@ module Tonto
     end
 
     def get(id)
-      object = tri / File.join(id.to_s, "attributes.json")
-      return JSON.parse(object.data, :max_nesting => false)
+      if exists?(id)
+        object = tri / File.join(id.to_s, "attributes.json")
+        return JSON.parse(object.data, :max_nesting => false)
+      else
+        return "#{id} doesn't exists"
+      end
     end
 
     def put(doc)
