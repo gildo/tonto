@@ -1,9 +1,6 @@
 require 'test/unit'
 
-begin
-    require 'redgreen'
-rescue LoadError
-end
+begin; require 'turn'; rescue LoadError; end
 
 dir = File.dirname(File.expand_path(__FILE__))
 $LOAD_PATH.unshift(File.join(dir, '..', 'lib'))

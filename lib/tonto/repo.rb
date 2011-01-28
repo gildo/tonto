@@ -2,7 +2,7 @@ module Tonto
 
   class Repo
 
-    attr_accessor :path, :db, :ids
+    attr_accessor :path, :repo, :ids
 
     def initialize(path)
 
@@ -12,8 +12,8 @@ module Tonto
         Grit::Repo.init(@path)
       end
 
-      @db = Grit::Repo.new(path)
-      @index = Grit::Index.new(@db)
+      @repo = Grit::Repo.new(path)
+      @index = Grit::Index.new(@repo)
 
       ids!
     end
@@ -21,12 +21,12 @@ module Tonto
     def ids!
       # Loads the list of known documents
       # !!! Find a better way to do this !!!
-      @db.commits.any? ? ids = tri.contents.map {|c| c.name} : ids = []
+      @repo.commits.any? ? ids = tri.contents.map {|c| c.name.to_i} : ids = []
       @ids = ids
     end
 
     def tri
-      @db.commits.first.nil? ? [] : (@db.commits.first).tree
+      @repo.commits.first.nil? ? [] : (@repo.commits.first).tree
     end
 
     def get(id)
