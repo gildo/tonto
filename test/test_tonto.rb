@@ -12,18 +12,16 @@ context "Tonto" do
     assert_equal "example", @repo.path
   end
 
-  test "create db" do
-    assert @repo.create("sherlok")
-  end
-
   test "db exist?" do
     @repo.create "tonto"
     assert @repo.dbs.include?("tonto")
+    assert_equal "tonto", @repo.database
   end
 
   test "open db" do
     @repo.create "tonto"
     assert @repo.open("tonto")
+    assert_equal "tonto", @repo.database
   end
 
   test "git repo" do

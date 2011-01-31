@@ -2,9 +2,9 @@ module Tonto
 
   class Repo
 
-    attr_accessor :path, :repo, :ids
+    attr_accessor :path, :repo, :ids, :DB
 
-    def initialize(path)
+    def initialize(path, database = "default")
 
       @path = path
 
@@ -14,6 +14,7 @@ module Tonto
 
       @repo = Grit::Repo.new(path)
       @index = Grit::Index.new(@repo)
+
 
       ids!
     end
