@@ -1,24 +1,67 @@
 tonto
-=======
+=====
 
-> mini description
-
-installation
-------------
-
-    $: [sudo] gem install tonto
+> stupid key-value document store ( that uses git as DB )
 
 description
 -----------
 
+**tonto** ( which can be translated from Italian to *git* ) is a _simple_, _high-level_ and a bit _stupid_ document-oriented store that allows you to use git repos as schema-less NoSQL databases.
 
-license
--------
+installation
+------------
 
-This program is distributed under GPL 
+The best way to install **tonto** is with RubyGems:
 
-contribution and issues
------------------------
+    $ [sudo] gem install tonto
 
-author
-------
+synopsis
+--------
+
+    require 'tonto'
+    db = Tonto::Repo.new("/my/git/repo", "mydb")
+
+    db.put {
+      :id      => 26,
+      :name    => "My first post",
+      :content => "This is COOOL",
+      :date    => "Time.now"
+    }
+
+    db.get(26)["name"]
+
+> My First post
+
+    db.put :id => 26, :name => "I'm tonto"
+> true
+
+    db.get(26)["name"]
+
+> "I'm tonto"
+
+    db.remove(26)
+
+> true
+
+    db.get(26)
+
+> false
+
+Change database:
+
+    db.open("mynewdb")
+
+> true
+
+Note, if the database does not exist will be created automatically.
+
+enjoy **:)**
+
+misc
+----
+
+* status: "alpha status"
+
+* license: AGPLv3
+
+inspired by [technoweenie](http://git-nosql-rar.heroku.com/), [nimbus](https://github.com/cloudhead/nimbus) and [gitmodel](https://github.com/pauldowman/gitmodel/)
