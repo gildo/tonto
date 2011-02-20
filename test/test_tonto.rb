@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'fileutils'
 
 require File.expand_path(File.dirname(__FILE__) + '/helper')
 
@@ -7,6 +8,24 @@ context "Tonto" do
   setup do
     @db = Tonto::Repo.new("example", "mydb")
   end
+  
+  context "database" do
+  
+    setup do
+      @repo = Tonto::Repo.new("repo", "db")
+    end
+    
+    test "is the real db" do
+      assert_equal "db", @repo.db
+    end
+    
+    test "create a db" do
+      assert @db.open("tonto")
+      assert_equal "tonto", @repo.db
+    end
+    
+  end
+
 
   test "repo path" do
     assert_equal "example", @db.path
@@ -48,8 +67,8 @@ context "Tonto" do
     assert_equal digest, Digest::MD5.hexdigest(@db.get(3)["blobs"]["octocat"])
   end
 
-  teardown do
-    FileUtils.rm_rf(@db.path)
-  end
+  #teardown do
+  #  FileUtils.rm_rf(@db.path)
+  #end
 
 end
