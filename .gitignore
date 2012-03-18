@@ -2,3 +2,4 @@
 *.gem
 test/example
 benchmark/
+*~
